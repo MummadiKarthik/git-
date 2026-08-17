@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="kar" id="kar">
+    <script>
+        function debounce(fn, delay) {
+            let timer;
+            return function(...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn.apply(this, args);
+                }, delay);
+            };
+        }
+
+        function kar(event) {
+            console.log(event.target.value);
+        }
+
+        var s = document.getElementById("kar");
+        var debouncedKar = debounce(kar, 1000); // create ONCE, outside the listener
+
+        s.addEventListener("input", debouncedKar);
+    </script>
+</body>
+</html>
